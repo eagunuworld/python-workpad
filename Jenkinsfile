@@ -36,9 +36,12 @@ pipeline{
                      label "python-node"
                    }
                 steps {
-                   sh "docker build -t ${REGISTRY}:${VERSION} ."
+                  sh "sudo chmod 666 /var/run/docker.sock"
+                     }
                     }
-                 }
+                    sh "docker build -t ${REGISTRY}:${VERSION} ."
+                  }
+               }
 
         stage('Push Docker Image To DockerHub') {
               steps {
