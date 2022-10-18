@@ -42,9 +42,9 @@ pipeline{
                  }
 
         stage('Push Docker Image To DockerHub') {
-          agent {
-                   label "python-node"
-                 }
+          // agent {
+          //          label "python-node"
+          //        }
               steps {
                    withCredentials([string(credentialsId: 'docker_password', variable: 'docker_pass')])  {
                    sh "docker login -u eagunuworld -p Aighegbe12345@ "
