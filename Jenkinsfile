@@ -47,7 +47,7 @@ pipeline{
                  }
               steps {
                    withCredentials([string(credentialsId: 'docker_password', variable: 'docker_pass')])  {
-                   sh "docker login -u eagunuworld -p ${dockerhub-password-credentials}"
+                   sh "docker login -u eagunuworld -p Aighegbe12345@ "
                    }
                  sh 'docker push ${REGISTRY}:${VERSION}'
                 }
