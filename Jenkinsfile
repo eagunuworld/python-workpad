@@ -12,13 +12,15 @@ pipeline{
           }
 
     stages {
-      stage('Example') {
-           if (env.BRANCH_NAME == 'python-dramed') {
-                 echo 'I only execute on this environment $env.BRANCH_NAME'
-               } else {
-                    echo 'I execute elsewhere'
-                   }
-                }
+
+
+      // stage('Example') {
+      //      if (env.BRANCH_NAME == 'python-dramed') {
+      //            echo 'I only execute on this environment $env.BRANCH_NAME'
+      //          } else {
+      //               echo 'I execute elsewhere'
+      //              }
+      //           }
 
          stage('checking... python version ') {
               steps {
