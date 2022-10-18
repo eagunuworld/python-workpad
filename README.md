@@ -15,3 +15,28 @@ Make sure you do the following:
 3. Change registry per your user name = "your_username/mypython-app-may20"
 4. Update your credentials ID in Pipeline you are creating.
 5. Open port 8096 in Ec2 instance.
+
+
+//stage('configMap And Secret Ref') {
+        steps {
+            withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
+              sh "kubectl apply -f cm-demo.yml"
+                  }
+                }
+           }
+
+stage('Deployment in Kubernetes clusters') {
+        steps {
+            withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
+            sh "helm upgrade --install --force --set name=${NAME} --set image.tag=${VERSION} frontend frontend/"
+              }
+         }
+    }
+
+  stage('Helm Version Deployment Releases') {
+            steps {
+                withCredentials([kubeconfigFile(credentialsId: 'my-configurations', variable: 'KUBECONFIG')]) {
+                sh "helm list"
+              }
+        }
+    }
