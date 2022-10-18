@@ -46,7 +46,7 @@ pipeline{
                    label "python-node"
                  }
               steps {
-                   withCredentials([string(credentialsId: 'dockerhub-password-credentials', variable: 'dockerhub-password-credentials')]) {
+                   withCredentials([string(credentialsId: 'docker_password', variable: 'docker_pass')])  {
                    sh "docker login -u eagunuworld -p ${dockerhub-password-credentials}"
                    }
                  sh 'docker push ${REGISTRY}:${VERSION}'
