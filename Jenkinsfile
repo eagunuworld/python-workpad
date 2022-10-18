@@ -1,15 +1,15 @@
 pipeline {
-    agent any
+    agent pythonAgent
 
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vastevenson/pytest-intro-vs.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'buld-Test-demo']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/eagunuworld/python-workpad.git']]])
             }
         }
         stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/vastevenson/pytest-intro-vs.git'
+                git branch: 'buld-Test-demo', url: 'https://github.com/eagunuworld/python-workpad.git'
                 sh 'python3 ops.py'
             }
         }
