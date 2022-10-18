@@ -35,7 +35,7 @@ pipeline{
                     label "python-node"
                     }
                   steps {
-                      sh " docker rmi  $(docker images -q)"
+                      sh "docker images -q"
                       }
                    }
 
