@@ -36,15 +36,13 @@ pipeline{
                      label "python-node"
                    }
                 steps {
-                  sh "sudo chmod 666 /var/run/docker.sock"
+                  // sh "sudo chmod 666 /var/run/docker.sock"
+                  sh " docker rmi  $(docker images -q)"
                   sh "docker build -t ${REGISTRY}:${VERSION} ."
                      }
                  }
 
         stage('Push Docker Image To DockerHub') {
-          // agent {
-          //          label "python-node"
-          //        }
               steps {
                    withCredentials([string(credentialsId: 'docker_password', variable: 'docker_pass')])  {
                    sh "docker login -u eagunuworld -p Aighegbe12345@ "
