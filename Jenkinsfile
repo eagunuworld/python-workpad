@@ -30,14 +30,6 @@ pipeline{
                   sh "python3.9 --version"
                    }
                 }
-        stage('Deleting Old versions ') {
-            agent {
-                    label "python-node"
-                    }
-                  steps {
-                      sh "docker rmi -f ${REGISTRY}:${VERSION}"
-                      }
-                   }
 
           stage('Building Docker Images') {
             agent {
@@ -57,5 +49,13 @@ pipeline{
                  sh 'docker push ${REGISTRY}:${VERSION}'
                 }
              }
+      stage('Deleting Old versions ') {
+          agent {
+                  label "python-node"
+                    }
+              steps {
+                  sh "docker rmi -f ${REGISTRY}:${VERSION}"
+              }
+          }
       }
 }
