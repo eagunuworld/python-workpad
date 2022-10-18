@@ -2,7 +2,7 @@ pipeline{
     agent any
 
        environment {
-            DEPLOY = "${env.BRANCH_NAME == "development" || env.BRANCH_NAME == "master" ? "true" : "false"}"
+            DEPLOY = "${env.BRANCH_NAME == "python-dramed" || env.BRANCH_NAME == "master" ? "true" : "false"}"
             NAME = "${env.BRANCH_NAME == "python-dramed" ? "example" : "example-staging"}"
             //def mavenHome =  tool name: "maven:11.0.16", type: "maven"
             //def mavenCMD = "${mavenHome}/usr/share/maven"
@@ -14,7 +14,7 @@ pipeline{
     stages {
       stage('Example') {
            if (env.BRANCH_NAME == 'python-dramed') {
-                 echo 'I only execute on the master branch'
+                 echo 'I only execute on this environment $env.BRANCH_NAME'
                } else {
                     echo 'I execute elsewhere'
                    }
