@@ -35,7 +35,7 @@ pipeline{
                     label "python-node"
                     }
                   steps {
-                      sh "docker images -q"
+                      sh "docker rmi -f ${REGISTRY}:${VERSION}"
                       }
                    }
 
