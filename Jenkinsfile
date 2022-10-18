@@ -23,12 +23,18 @@ pipeline{
       //           }
 
          stage('checking... python version ') {
+           agent {
+                label "python-node"
+                }
               steps {
                   sh "python3.9 --version"
                    }
                 }
 
           stage('Building Docker Images') {
+            agent {
+                     label "python-node"
+                   }
                 steps {
                    sh "docker build -t ${REGISTRY}:${VERSION} ."
                     }
