@@ -49,27 +49,27 @@ pipeline{
                  sh 'docker push ${REGISTRY}:${VERSION}'
                 }
              }
-      stage('Deleting Old versions ') {
-          agent {
-                  label "python-node"
-                    }
-              steps {
-                  sh "docker rmi -f ${REGISTRY}:${VERSION}"
-              }
-          }
     stage('stop previous containers') {
             steps {
-               sh 'docker ps -f name=my-framed -q | xargs --no-run-if-empty docker container stop'
-               sh 'docker container ls -a -fname=my-framed  -q | xargs -r docker container rm'
+               sh 'docker ps -f name=framed -q | xargs --no-run-if-empty docker container stop'
+               sh 'docker container ls -a -fname=framed  -q | xargs -r docker container rm'
             }
           }
 
     stage('Docker Run') {
         steps{
             script {
-              sh 'docker run -d -p 8085:5000 --rm --name my-framed ${REGISTRY}:${VERSION}'
+              sh 'docker run -d -p 8085:5000 --rm --name framed ${REGISTRY}:${VERSION}'
                }
              }
          }
+    stage('Deleting Old versions ') {
+        agent {
+              label "python-node"
+                  }
+            steps {
+                sh "docker rmi -f ${REGISTRY}:${VERSION}"
+              }
+        }
    }
 }
