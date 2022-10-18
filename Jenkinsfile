@@ -30,14 +30,21 @@ pipeline{
                   sh "python3.9 --version"
                    }
                 }
+        stage('Deleting Old versions ') {
+            agent {
+                    label "python-node"
+                    }
+                  steps {
+                       sh " docker rmi  $(docker images -q) "
+                      }
+                   }
 
           stage('Building Docker Images') {
             agent {
                      label "python-node"
                    }
                 steps {
-                  // sh "sudo chmod 666 /var/run/docker.sock"
-                  sh " docker rmi  $(docker images -q)"
+                  sh "sudo chmod 666 /var/run/docker.sock"
                   sh "docker build -t ${REGISTRY}:${VERSION} ."
                      }
                  }
