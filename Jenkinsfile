@@ -51,15 +51,15 @@ pipeline{
              }
     stage('stop previous containers') {
             steps {
-               sh 'docker ps -f name=framed -q | xargs --no-run-if-empty docker container stop'
-               sh 'docker container ls -a -fname=framed  -q | xargs -r docker container rm'
+               sh 'docker ps -f name=monitor -q | xargs --no-run-if-empty docker container stop'
+               sh 'docker container ls -a -fname=monitor  -q | xargs -r docker container rm'
             }
           }
 
     stage('Docker Run') {
         steps{
             script {
-              sh 'docker run -d -p 5000:5000 --rm --name framed ${REGISTRY}:${VERSION}'
+              sh 'docker run -d -p 5000:5000 --rm --name monitor ${REGISTRY}:${VERSION}'
                }
              }
          }
